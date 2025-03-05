@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.1">
+    <Name>DeleteAllAttachments</Name>
+    <Version>0.0.2</Version>
+    <Vendor>Das Ulicorn</Vendor>
+    <URL>javascript:alert('Du hast das easteregg gefunden!')</URL>
+    <License>GPL3</License>
+    <ChangeLog Date="2025-03-05 13:37:00" Version="0.0.2">Renaming and publishing.</ChangeLog>
+    <ChangeLog Date="2020-04-01 13:37:00" Version="0.0.1">First try.</ChangeLog>
+    <Description Lang="en">A button to delete attachments from articles.</Description>
+    <Framework>6.0.x</Framework>
+    <PackageRequired Version="6.0.55">Znuny4OTRS-Repo</PackageRequired>
+    <CodeInstall Type="post">
+    $Kernel::OM->Get('Kernel::System::ZnunyHelper')->_ArticleActionsAdd(
+    Email => [{
+      Key      => 'DeleteAllAttachments',
+      Module   => 'Kernel::Output::HTML::ArticleAction::DeleteAllAttachments',
+      Priority => 999,
+    }],
+    Phone => [{
+      Key      => 'DeleteAllAttachments',
+      Module   => 'Kernel::Output::HTML::ArticleAction::DeleteAllAttachments',
+      Priority => 999,
+    }]
+    );
+    </CodeInstall>
+    <CodeUninstall Type="pre">
+    $Kernel::OM->Get('Kernel::System::ZnunyHelper')->_ArticleActionsRemove(
+    Email => [{
+      Key      => 'DeleteAllAttachments',
+    }],
+    Phone => [{
+      Key      => 'DeleteAllAttachments',
+    }]
+    );
+    </CodeUninstall>
+    <BuildDate>2020-04-01 12:51:02</BuildDate>
+    <BuildHost>dreckstall.rz.uni-kiel.de</BuildHost>
+    <Filelist>
+        <File Location="Kernel/Config/Files/XML/DeleteAllAttachments.xml" />
+        <File Location="Kernel/Modules/AgentTicketDeleteAllAttachments.pm" />
+        <File Location="Kernel/Output/HTML/ArticleAction/DeleteAllAttachments.pm" />
+    </Filelist>
+</otrs_package>
+#FIXME
